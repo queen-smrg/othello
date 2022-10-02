@@ -101,6 +101,7 @@ function place_stone_self(cell_id) {
     } else {
       othello_feld[cell_row_num][cell_col_num] = 1; //黒石を置く
       change_stone_self(1, around_array)            //石の色を変える
+      message_p.innerText = "白の番です";
     }
   } else {
     //白石を置けるかのチェック
@@ -110,6 +111,7 @@ function place_stone_self(cell_id) {
     } else {
       othello_feld[cell_row_num][cell_col_num] = -1; //白石を置く
       change_stone_self(-1, around_array)            //石の色を変える
+      message_p.innerText = "黒の番です";
     }
   }
 
@@ -237,8 +239,12 @@ function change_stone_self(turn_num1, array) {
 
 //パスボタンの関数
 function pass_self() {
+  if (game_record.length % 2 == 0) {
+    message_p.innerText = "黒がパスしたので白の番です。";
+  } else {
+    message_p.innerText = "白がパスしたので黒の番です。";
+  }
   game_record.push("pass");
-  console.log("パスしました")
   judgement_self()
 }
 
