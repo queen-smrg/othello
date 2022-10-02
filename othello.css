@@ -1,0 +1,89 @@
+.square_contents {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.square_contents div {
+  position: relative;
+  width: 11.3%;
+  background-color: #12812e;
+}
+
+.square_contents div::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+/*********************罫線**********************************************/
+
+.board {
+  border-right: solid 1px white;
+  border-bottom: solid 1px white;
+}
+
+.square_contents div#h1,#h2,#h3,#h4,#h5,#h6,#h7,#h8{
+  border-right: solid 1px black;
+}
+
+.square_contents div#a8,#b8,#c8,#d8,#e8,#f8,#g8,#h8{
+  border-bottom: solid 1px black;
+}
+
+/**********************行列幅の設定*****************************************/
+.square_contents div#row-0{
+  background-color: #000000;
+  color: white;
+  width: 2rem;
+  height: 2rem;
+}
+
+.square_contents div#row-a,#row-b,#row-c,#row-d,#row-e,#row-f,#row-g,#row-h{
+  background-color: #000000;
+  color: white;
+  height: 2rem;
+  border-right: solid 1px black;
+}
+
+.square_contents div#col-1,#col-2,#col-3,#col-4,#col-5,#col-6,#col-7,#col-8{
+  background-color: #000000;
+  color: white;
+  width: 2rem;
+}
+
+.square_contents p {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+/****************************石の色**************************************/
+
+.dice_b {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: black;
+}
+
+.dice_w {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+}
+
+
+button {
+  margin: 10px 0;
+}
