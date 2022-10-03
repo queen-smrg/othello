@@ -22,6 +22,12 @@ body{
   padding-top: 100%;
 }
 
+.message {
+  background-color: antiquewhite;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 /*********************罫線**********************************************/
 
 .board_white_border {
