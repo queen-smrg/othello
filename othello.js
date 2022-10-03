@@ -71,7 +71,9 @@ function set_onclick_self() {
   //onclick属性を設定
   for (let r = 0; r < 8; r++) {
     for (let c = 0; c < 8; c++) {
-      document.getElementById(othello_feld_id[r][c]).setAttribute("onclick", "place_stone_self(this.id)")
+      if (othello_feld[r][c] == 0) {
+        document.getElementById(othello_feld_id[r][c]).setAttribute("onclick", "place_stone_self(this.id)")
+      }
     }
   }
 }
