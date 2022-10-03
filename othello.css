@@ -46,32 +46,42 @@ body{
 
 
 /**********************行列幅の設定*****************************************/
-.square_contents div#row-0{
+.square_contents .corner{
   background-color: #000000;
   color: white;
   width: 2rem;
   height: 2rem;
 }
 
-.square_contents div#row-a,#row-b,#row-c,#row-d,#row-e,#row-f,#row-g,#row-h{
+
+.square_contents .raw_name {
   background-color: #000000;
   color: white;
   height: 2rem;
   border-right: solid 1px black;
 }
 
-.square_contents div#col-1,#col-2,#col-3,#col-4,#col-5,#col-6,#col-7,#col-8{
+.square_contents .col_name{
   background-color: #000000;
   color: white;
   width: 2rem;
 }
 
-.square_contents p {
+
+.square_contents .raw_name p {
   position: absolute;
   top: 10%;
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+.square_contents .col_name p {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
 
 /****************************石の色**************************************/
 
