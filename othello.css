@@ -46,13 +46,12 @@ body{
 
 
 /**********************行列幅の設定*****************************************/
-.square_contents .corner{
+.square_contents .corner {
   background-color: #000000;
   color: white;
   width: 2rem;
   height: 2rem;
 }
-
 
 .square_contents .raw_name {
   background-color: #000000;
@@ -61,12 +60,11 @@ body{
   border-right: solid 1px black;
 }
 
-.square_contents .col_name{
+.square_contents .col_name {
   background-color: #000000;
   color: white;
   width: 2rem;
 }
-
 
 .square_contents .raw_name p {
   position: absolute;
