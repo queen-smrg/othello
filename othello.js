@@ -30,6 +30,8 @@ let user = 1; //userが黒スタート
 let game_record = ["d4", "d5", "e4", "e5"];
 
 let message_p = document.getElementById("message_box");
+message_p.innerText = "ゲームが開始されました。";
+
 const col_names = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
 
