@@ -1,7 +1,13 @@
+body{
+  width: 100%;
+  text-align: center;
+}
+
 .square_contents {
   display: flex;
   flex-wrap: wrap;
   max-width: 600px;
+  margin: 0 auto;
 }
 
 .square_contents div {
@@ -18,18 +24,26 @@
 
 /*********************罫線**********************************************/
 
-.board {
+.board_white_border {
   border-right: solid 1px white;
   border-bottom: solid 1px white;
 }
 
-.square_contents div#h1,#h2,#h3,#h4,#h5,#h6,#h7,#h8{
+.board_black_border_r{
+  border-right: solid 1px black;
+  border-bottom: solid 1px white;
+}
+
+.board_black_border_b{
+  border-bottom: solid 1px black;
+  border-right: solid 1px white;
+}
+
+.board_black_border_rb{
+  border-bottom: solid 1px black;
   border-right: solid 1px black;
 }
 
-.square_contents div#a8,#b8,#c8,#d8,#e8,#f8,#g8,#h8{
-  border-bottom: solid 1px black;
-}
 
 /**********************行列幅の設定*****************************************/
 .square_contents div#row-0{
