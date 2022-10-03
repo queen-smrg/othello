@@ -47,16 +47,17 @@ function display_othello() {
     let feld_line = othello_feld[r];
     for (let c = 0; c < 8; c++) {
       let span_tag = document.createElement('span');
+      let div_tag = document.getElementById(othello_feld_id[r][c]);
+      div_tag.innerHTML = "";
       if (feld_line[c] == 1) {
         span_tag.classList.add("dice_b")
-        document.getElementById(othello_feld_id[r][c]).appendChild(span_tag);
       } else if (feld_line[c] == -1) {
         //feld_line[c] = '○';
         span_tag.classList.add("dice_w")
-        document.getElementById(othello_feld_id[r][c]).appendChild(span_tag);
       } else {
         ;
       }
+      div_tag.appendChild(span_tag);
     }
     //console.log(feld_line)
   }
