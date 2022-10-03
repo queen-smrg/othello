@@ -11,6 +11,7 @@
 
 <body>
   <h1>一人でオセロ</h1>
+  <p id="message_box"></p>
   <button id="reset" type="button" onclick="location.href='./othello_self.html'">リセット</button>
 
   <div id="othello-feld" class="square_contents">
@@ -26,89 +27,87 @@
     <div class="raw_name" id="row-h"><p>h</p></div>
     <!--1列目-->
     <div class="col_name" id="col-1"><p>1</p></div>
-    <div class="board" id="a1_00"></div>
-    <div class="board" id="b1_01"></div>
-    <div class="board" id="c1_02"></div>
-    <div class="board" id="d1_03"></div>
-    <div class="board" id="e1_04"></div>
-    <div class="board" id="f1_05"></div>
-    <div class="board" id="g1_06"></div>
-    <div class="board" id="h1_07"></div>
+    <div class="board_white_border" id="a1_00"></div>
+    <div class="board_white_border" id="b1_01"></div>
+    <div class="board_white_border" id="c1_02"></div>
+    <div class="board_white_border" id="d1_03"></div>
+    <div class="board_white_border" id="e1_04"></div>
+    <div class="board_white_border" id="f1_05"></div>
+    <div class="board_white_border" id="g1_06"></div>
+    <div class="board_black_border_r" id="h1_07"></div>
     <!--2列目-->
     <div class="col_name" id="col-2"><p>2</p></div>
-    <div class="board" id="a2_10"></div>
-    <div class="board" id="b2_11"></div>
-    <div class="board" id="c2_12"></div>
-    <div class="board" id="d2_13"></div>
-    <div class="board" id="e2_14"></div>
-    <div class="board" id="f2_15"></div>
-    <div class="board" id="g2_16"></div>
-    <div class="board" id="h2_17"></div>
+    <div class="board_white_border" id="a2_10"></div>
+    <div class="board_white_border" id="b2_11"></div>
+    <div class="board_white_border" id="c2_12"></div>
+    <div class="board_white_border" id="d2_13"></div>
+    <div class="board_white_border" id="e2_14"></div>
+    <div class="board_white_border" id="f2_15"></div>
+    <div class="board_white_border" id="g2_16"></div>
+    <div class="board_black_border_r" id="h2_17"></div>
     <!--3列目-->
     <div class="col_name" id="col-3"><p>3</p></div>
-    <div class="board" id="a3_20"></div>
-    <div class="board" id="b3_21"></div>
-    <div class="board" id="c3_22"></div>
-    <div class="board" id="d3_23"></div>
-    <div class="board" id="e3_24"></div>
-    <div class="board" id="f3_25"></div>
-    <div class="board" id="g3_26"></div>
-    <div class="board" id="h3_27"></div>
+    <div class="board_white_border" id="a3_20"></div>
+    <div class="board_white_border" id="b3_21"></div>
+    <div class="board_white_border" id="c3_22"></div>
+    <div class="board_white_border" id="d3_23"></div>
+    <div class="board_white_border" id="e3_24"></div>
+    <div class="board_white_border" id="f3_25"></div>
+    <div class="board_white_border" id="g3_26"></div>
+    <div class="board_black_border_r" id="h3_27"></div>
     <!--4列目-->
     <div class="col_name" id="col-4"><p>4</p></div>
-    <div class="board" id="a4_30"></div>
-    <div class="board" id="b4_31"></div>
-    <div class="board" id="c4_32"></div>
-    <div class="board" id="d4_33"><span class="dice_w"></span></div>
-    <div class="board" id="e4_34"><span class="dice_b"></span></div>
-    <div class="board" id="f4_35"></div>
-    <div class="board" id="g4_36"></div>
-    <div class="board" id="h4_37"></div>
+    <div class="board_white_border" id="a4_30"></div>
+    <div class="board_white_border" id="b4_31"></div>
+    <div class="board_white_border" id="c4_32"></div>
+    <div class="board_white_border" id="d4_33"><span class="dice_w"></span></div>
+    <div class="board_white_border" id="e4_34"><span class="dice_b"></span></div>
+    <div class="board_white_border" id="f4_35"></div>
+    <div class="board_white_border" id="g4_36"></div>
+    <div class="board_black_border_r" id="h4_37"></div>
     <!--5列目-->
     <div class="col_name" id="col-5"><p>5</p></div>
-    <div class="board" id="a5_40"></div>
-    <div class="board" id="b5_41"></div>
-    <div class="board" id="c5_42"></div>
-    <div class="board" id="d5_43"><span class="dice_b"></span></div>
-    <div class="board" id="e5_44"><span class="dice_w"></span></div>
-    <div class="board" id="f5_45"></div>
-    <div class="board" id="g5_46"></div>
-    <div class="board" id="h5_47"></div>
+    <div class="board_white_border" id="a5_40"></div>
+    <div class="board_white_border" id="b5_41"></div>
+    <div class="board_white_border" id="c5_42"></div>
+    <div class="board_white_border" id="d5_43"><span class="dice_b"></span></div>
+    <div class="board_white_border" id="e5_44"><span class="dice_w"></span></div>
+    <div class="board_white_border" id="f5_45"></div>
+    <div class="board_white_border" id="g5_46"></div>
+    <div class="board_black_border_r" id="h5_47"></div>
     <!--6列目-->
     <div class="col_name" id="col-6"><p>6</p></div>
-    <div class="board" id="a6_50"></div>
-    <div class="board" id="b6_51"></div>
-    <div class="board" id="c6_52"></div>
-    <div class="board" id="d6_53"></div>
-    <div class="board" id="e6_54"></div>
-    <div class="board" id="f6_55"></div>
-    <div class="board" id="g6_56"></div>
-    <div class="board" id="h6_57"></div>
+    <div class="board_white_border" id="a6_50"></div>
+    <div class="board_white_border" id="b6_51"></div>
+    <div class="board_white_border" id="c6_52"></div>
+    <div class="board_white_border" id="d6_53"></div>
+    <div class="board_white_border" id="e6_54"></div>
+    <div class="board_white_border" id="f6_55"></div>
+    <div class="board_white_border" id="g6_56"></div>
+    <div class="board_black_border_r" id="h6_57"></div>
     <!--7列目-->
     <div class="col_name" id="col-7"><p>7</p></div>
-    <div class="board" id="a7_60"></div>
-    <div class="board" id="b7_61"></div>
-    <div class="board" id="c7_62"></div>
-    <div class="board" id="d7_63"></div>
-    <div class="board" id="e7_64"></div>
-    <div class="board" id="f7_65"></div>
-    <div class="board" id="g7_66"></div>
-    <div class="board" id="h7_67"></div>
+    <div class="board_white_border" id="a7_60"></div>
+    <div class="board_white_border" id="b7_61"></div>
+    <div class="board_white_border" id="c7_62"></div>
+    <div class="board_white_border" id="d7_63"></div>
+    <div class="board_white_border" id="e7_64"></div>
+    <div class="board_white_border" id="f7_65"></div>
+    <div class="board_white_border" id="g7_66"></div>
+    <div class="board_black_border_r" id="h7_67"></div>
     <!--8列目-->
     <div class="col_name" id="col-8"><p>8</p></div>
-    <div class="board" id="a8_70"></div>
-    <div class="board" id="b8_71"></div>
-    <div class="board" id="c8_72"></div>
-    <div class="board" id="d8_73"></div>
-    <div class="board" id="e8_74"></div>
-    <div class="board" id="f8_75"></div>
-    <div class="board" id="g8_76"></div>
-    <div class="board" id="h8_77"></div>
-
+    <div class="board_black_border_b" id="a8_70"></div>
+    <div class="board_black_border_b" id="b8_71"></div>
+    <div class="board_black_border_b" id="c8_72"></div>
+    <div class="board_black_border_b" id="d8_73"></div>
+    <div class="board_black_border_b" id="e8_74"></div>
+    <div class="board_black_border_b" id="f8_75"></div>
+    <div class="board_black_border_b" id="g8_76"></div>
+    <div class="board_black_border_rb" id="h8_77"></div>
   </div>
 
   <p><button id="wait" type="button" onclick="pass_self()">パスする</button>結果が表示されない場合2回クリックしてください</p>
-  <p id="message_box"></p>
   <!--
   <p><a href="./othello_vs_cpu.html">CPUと対戦するページはコチラ</a></p>
   -->
