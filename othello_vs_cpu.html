@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="othello.css">
+  <title>オセロ</title>
+</head>
+
+<body>
+  <h1>オセロ　CPU対戦</h1>
+  <table border="1">
+    <tbody>
+      <tr>
+        <td>
+          <p>手番を選択</p>
+        </td>
+        <td>
+          <form id="teban_rad">
+            <label><input type="radio" name="teban" value=1 checked>黒</label>
+            <label><input type="radio" name="teban" value=-1>白</label>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>レベルを選択</p>
+        </td>
+        <td>
+          <form id="level_rad">
+            <label><input type="radio" name="level" value=0 checked>lebel0</label>
+            <label><input type="radio" name="level" value=1>level1</label>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>サポ―ト</p>
+        </td>
+        <td>
+          <form id="support_rad">
+            <label><input type="radio" name="support" value=0 checked>OFF</label>
+            <label><input type="radio" name="support" value=1>ON</label>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button id="start_btn" type="button" onclick="othello_start()">ゲームを開始する</button>
+
+  <p class="message" id="message_box"></p>
+  <button id="reset" type="button" onclick="location.href='./othello_vs_cpu.html'">リセット</button>
+
+
+  <div id="othello-feld" class="square_contents">
+    <!--列名-->
+    <div class="corner" id="row-0"></div>
+    <div class="raw_name" id="row-a">
+      <p>a</p>
+    </div>
+    <div class="raw_name" id="row-b">
+      <p>b</p>
+    </div>
+    <div class="raw_name" id="row-c">
+      <p>c</p>
+    </div>
+    <div class="raw_name" id="row-d">
+      <p>d</p>
+    </div>
+    <div class="raw_name" id="row-e">
+      <p>e</p>
+    </div>
+    <div class="raw_name" id="row-f">
+      <p>f</p>
+    </div>
+    <div class="raw_name" id="row-g">
+      <p>g</p>
+    </div>
+    <div class="raw_name" id="row-h">
+      <p>h</p>
+    </div>
+    <!--1列目-->
+    <div class="col_name" id="col-1">
+      <p>1</p>
+    </div>
+    <div class="board_white_border" id="a1_00"></div>
+    <div class="board_white_border" id="b1_01"></div>
+    <div class="board_white_border" id="c1_02"></div>
+    <div class="board_white_border" id="d1_03"></div>
+    <div class="board_white_border" id="e1_04"></div>
+    <div class="board_white_border" id="f1_05"></div>
+    <div class="board_white_border" id="g1_06"></div>
+    <div class="board_black_border_r" id="h1_07"></div>
+    <!--2列目-->
+    <div class="col_name" id="col-2">
+      <p>2</p>
+    </div>
+    <div class="board_white_border" id="a2_10"></div>
+    <div class="board_white_border" id="b2_11"></div>
+    <div class="board_white_border" id="c2_12"></div>
+    <div class="board_white_border" id="d2_13"></div>
+    <div class="board_white_border" id="e2_14"></div>
+    <div class="board_white_border" id="f2_15"></div>
+    <div class="board_white_border" id="g2_16"></div>
+    <div class="board_black_border_r" id="h2_17"></div>
+    <!--3列目-->
+    <div class="col_name" id="col-3">
+      <p>3</p>
+    </div>
+    <div class="board_white_border" id="a3_20"></div>
+    <div class="board_white_border" id="b3_21"></div>
+    <div class="board_white_border" id="c3_22"></div>
+    <div class="board_white_border" id="d3_23"></div>
+    <div class="board_white_border" id="e3_24"></div>
+    <div class="board_white_border" id="f3_25"></div>
+    <div class="board_white_border" id="g3_26"></div>
+    <div class="board_black_border_r" id="h3_27"></div>
+    <!--4列目-->
+    <div class="col_name" id="col-4">
+      <p>4</p>
+    </div>
+    <div class="board_white_border" id="a4_30"></div>
+    <div class="board_white_border" id="b4_31"></div>
+    <div class="board_white_border" id="c4_32"></div>
+    <div class="board_white_border" id="d4_33"></div>
+    <div class="board_white_border" id="e4_34"></div>
+    <div class="board_white_border" id="f4_35"></div>
+    <div class="board_white_border" id="g4_36"></div>
+    <div class="board_black_border_r" id="h4_37"></div>
+    <!--5列目-->
+    <div class="col_name" id="col-5">
+      <p>5</p>
+    </div>
+    <div class="board_white_border" id="a5_40"></div>
+    <div class="board_white_border" id="b5_41"></div>
+    <div class="board_white_border" id="c5_42"></div>
+    <div class="board_white_border" id="d5_43"></div>
+    <div class="board_white_border" id="e5_44"></div>
+    <div class="board_white_border" id="f5_45"></div>
+    <div class="board_white_border" id="g5_46"></div>
+    <div class="board_black_border_r" id="h5_47"></div>
+    <!--6列目-->
+    <div class="col_name" id="col-6">
+      <p>6</p>
+    </div>
+    <div class="board_white_border" id="a6_50"></div>
+    <div class="board_white_border" id="b6_51"></div>
+    <div class="board_white_border" id="c6_52"></div>
+    <div class="board_white_border" id="d6_53"></div>
+    <div class="board_white_border" id="e6_54"></div>
+    <div class="board_white_border" id="f6_55"></div>
+    <div class="board_white_border" id="g6_56"></div>
+    <div class="board_black_border_r" id="h6_57"></div>
+    <!--7列目-->
+    <div class="col_name" id="col-7">
+      <p>7</p>
+    </div>
+    <div class="board_white_border" id="a7_60"></div>
+    <div class="board_white_border" id="b7_61"></div>
+    <div class="board_white_border" id="c7_62"></div>
+    <div class="board_white_border" id="d7_63"></div>
+    <div class="board_white_border" id="e7_64"></div>
+    <div class="board_white_border" id="f7_65"></div>
+    <div class="board_white_border" id="g7_66"></div>
+    <div class="board_black_border_r" id="h7_67"></div>
+    <!--8列目-->
+    <div class="col_name" id="col-8">
+      <p>8</p>
+    </div>
+    <div class="board_black_border_b" id="a8_70"></div>
+    <div class="board_black_border_b" id="b8_71"></div>
+    <div class="board_black_border_b" id="c8_72"></div>
+    <div class="board_black_border_b" id="d8_73"></div>
+    <div class="board_black_border_b" id="e8_74"></div>
+    <div class="board_black_border_b" id="f8_75"></div>
+    <div class="board_black_border_b" id="g8_76"></div>
+    <div class="board_black_border_rb" id="h8_77"></div>
+  </div>
+
+
+  <button id="wait" type="button" onclick="pass_vs()">パスする</button>
+  <audio id="btn_audio">
+    <source src="./audio/pass_hiroyuki.wav" type="audio/mp3">
+  </audio>
+  <p id="message_box"></p>
+  <p><a href="./othello_self.html">一人で対戦するページはコチラ</a></p>
+  <script src="othello_1008.js"></script>
+</body>
+
+</html>
