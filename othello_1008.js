@@ -77,7 +77,7 @@ function display_othello() {
     //console.log(othello_field[r])
   }
   //console.log("盤面を表示しました")
-  console.log(game_record);
+  //console.log(game_record);
   return;
 }
 
@@ -129,8 +129,6 @@ function place_stone_self(cell_id) {
 
   //棋譜に追加
   game_record.push(cell_id)
-  //console.log("game_record", game_record.length)
-
   display_othello()
 
   //結果の判定
@@ -160,7 +158,6 @@ function check_place_self(turn_num, row_num, col_num, field_array2d) {
       if (row_col_nums.includes(row_num + i) && row_col_nums.includes(col_num + j)) {
         if (field_array2d[row_num + i][col_num + j] == turn_num * -1) {
           around_places[k] = String(row_num + i) + String(col_num + j);
-          //console.log(String(row_num + i) + String(col_num + j))
           around_places_sum = around_places_sum + (row_num + i) * 10 + (col_num + j);
         } else {
           continue; //undefindのときは次のループ
@@ -168,10 +165,8 @@ function check_place_self(turn_num, row_num, col_num, field_array2d) {
       }
     }
   }
-  //console.log(around_places)
 
   if (around_places_sum == 0) {
-    //console.log("周りに石がありません。")
     return [false, around_places];
   } else {
     for (let i = 0; i < around_places.length; i++) {
@@ -182,7 +177,6 @@ function check_place_self(turn_num, row_num, col_num, field_array2d) {
           let cell_index_int = Number(around_places[i]) + calc_array[i] * j;
           if (0 <= cell_index_int && cell_index_int < 78) {
             let cell_index_str = ('00' + cell_index_int).slice(-2);
-            //console.log("cell_indx_str", cell_index_str)
             let othello_field_cell = field_array2d[cell_index_str[0]][cell_index_str[1]];
             if (othello_field_cell == 0) {
               break;
@@ -218,7 +212,6 @@ function change_stone_self(turn_num, array, field_array2d) {
           if (othello_field_cell == turn_num * -1) {
             change_places_child.push(cell_index_str);
           } else if (othello_field_cell == turn_num) {
-            //console.log("change_places_child", change_places_child)
             change_places = change_places.concat(change_places_child);
             break;
           } else {
@@ -228,7 +221,6 @@ function change_stone_self(turn_num, array, field_array2d) {
       }
     }
   }
-  //console.log(change_place_array)
 
   for (let i = 0; i < change_places.length; i++) {
     let change_indx = change_places[i];
@@ -246,8 +238,6 @@ function change_stone_self(turn_num, array, field_array2d) {
 //パスボタンの関数
 function pass_self() {
   let message_p_text = "";
-  //let turn_num = turn * -1;
-  //console.log("pass", turn_num)
   if (turn == 1) {
     message_p_text = "黒がパスしたので白の番です。";
   } else if (turn == -1) {
@@ -305,12 +295,10 @@ function can_not_place_all() {
 //最終の結果判定チェック
 function judgement() {
   let game_record_slice = game_record.slice(-2);
-  //console.log(game_record_slice)
   if (can_not_place_all() || is_0_inFelid() || (game_record_slice[0] == "pass" && game_record_slice[1] == "pass")) {
     let count = [0, 0]; //[黒の個数、白の個数]
 
     for (let r = 0; r < 8; r++) {
-      //console.log(othello_field[r]);
       let sum_b = othello_field[r].filter(function (value) {
         return value == 1;
       })
@@ -414,7 +402,6 @@ function place_stone_vs(cell_id) {
 
   //棋譜に追加
   game_record.push(cell_id);
-  //console.log("game_record", game_record.length)
 
   //結果の判定
   judgement();
@@ -453,7 +440,6 @@ function place_cpu(turn_num, level_num) {
       }
     }
   }
-  console.log("can_place", can_place);
 
   let get_index = "";
   let get = "";
@@ -468,6 +454,7 @@ function place_cpu(turn_num, level_num) {
     return;
   } else if (can_place.length == 1) {
     //置けるところが1個しかないならおいて終了
+    console.log("置けるところがひとつだけです。");
     get = can_place[0];
     get_cell = can_place_id[0];
     change_stone_self(turn_num, get, othello_field);
@@ -479,178 +466,140 @@ function place_cpu(turn_num, level_num) {
       get_index = Math.floor(Math.random() * can_place.length)
       get = can_place[get_index];
       get_cell = can_place_id[get_index];
-      console.log("get", get);
       change_stone_self(turn_num, get, othello_field);
       othello_field[get_cell[0]][get_cell[1]] = turn_num;
 
     } else if (level_num == 1) {
-      //角を優先的にとる
-      for (let i = 0; i < can_place_id.length; i++) {
-        if (corners.includes(can_place_id[i])) {
-          //get_index = can_place_id[i]
-          get = can_place[i];
-          get_cell = can_place_id[i];
-          break;
-        }
-      }
-
-      //角がなければ
-      if (get.length == 0) {
-        //相手のおける場所を少なくするように置く
-        let risky_place = []; //角がとられそうな場所を格納
-        let next_place_other = [];
-
-        for (let i = 0; i < can_place_id.length; i++) {
-          //ひとつずつ石を置いてみる
-          let othello_field_next = [];
-          for (let i = 0; i < 8; i++) {
-            othello_field_next[i] = Array.from(othello_field[i]);
-          }
-          console.log(othello_field_next);
-          change_stone_self(turn_num, can_place_id[i], othello_field_next);
-          othello_field_next[can_place_id[i][0]][can_place_id[i][1]] = turn_num;
-
-          //置いた後で相手の置ける場所を数える
-          let other_count = 0;
-          for (let r = 0; r < 8; r++) {
-            for (let c = 0; c < 8; c++) {
-              if (othello_field[r][c] == 0) {
-                let check_func_next = check_place_self(turn_num, r, c, othello_field_next);
-                if (check_func_next[0]) {
-                  other_count++;
-                  if (corners.includes(String(r) + String(c))) {
-                    risky_place.push(can_place_id[i]);
-                  }
-                }
-              }
-            }
-          }
-          next_place_other.push(other_count);
-        }
-        let next_place_other_min = Math.min(...next_place_other);
-        let min_index = [];
-        let hoge = 0
-        while (true) {
-          hoge = next_place_other.indexOf(next_place_other_min, hoge + 1);
-          if (hoge == -1) {
-            break;
-          } else {
-            min_index.push(hoge);
-          }
-        }
-
-        if (min_index.length == 1) {
-          get = can_place[min_index[0]];
-          get_cell = can_place_id[min_index[0]];
-        } else {
-          let min_index_shuffled = arrayShuffle(min_index);
-          for (let i = 0; i < min_index_shuffled.length; i++) {
-            if (risky_place.includes(can_place_id[min_index[i]])) {
-              get = can_place[min_index_shuffled[i]];
-              get_cell = can_place_id[min_index_shuffled[i]];
-              break;
-            }
-            if (get.length == 0) {
-              get_index = Math.floor(Math.random() * min_index_shuffled.length)
-              get = can_place[get_index];
-              get_cell = can_place_id[get_index];
-            }
-          }
-        }
-      }
+      //スコアに応じて置く場所を決める
+      get_index = best_place_level1(turn_num, can_place_id, can_place, othello_field);
+      get = can_place[get_index];
+      get_cell = can_place_id[get_index];
       change_stone_self(turn_num, get, othello_field);
       othello_field[get_cell[0]][get_cell[1]] = turn_num;
     }
-  }
-  //色を変える
-  //setTimeout(display_othello, 1000);
-  setTimeout(function () {
-    display_othello();
-    console.log("CPUが置きました", get_cell);
-    message_p.innerText = turn_texts[game_record.length % 2] + "の番です";
-    game_record.push(othello_field_id[get_cell[0]][get_cell[1]]);
-    show_support(turn_num * -1, support);
-    judgement();
-  }, 1000);
-
-  return;
-}
-
-
-//パスボタンの関数
-function pass_vs() {
-  if (teban == 0) {
+    }
+    setTimeout(function () {
+      //1秒後に色を変える
+      display_othello();
+      console.log("CPUが置きました", get_cell);
+      message_p.innerText = turn_texts[game_record.length % 2] + "の番です";
+      game_record.push(othello_field_id[get_cell[0]][get_cell[1]]);
+      show_support(turn_num * -1, support);
+      judgement();
+    }, 1000);
     return;
   }
-  let message_p_text = "";
-  //let turn_num = turn * -1;
-  console.log("pass", teban)
-  if (teban == 1) {
-    message_p_text = "黒がパスしたので白の番です。";
-  } else if (teban == -1) {
-    message_p_text = "白がパスしたので黒の番です。";
+
+
+  //パスボタンの関数
+  function pass_vs() {
+    if (teban == 0) {
+      return;
+    }
+    let message_p_text = "";
+    console.log("pass", teban)
+    if (teban == 1) {
+      message_p_text = "黒がパスしたので白の番です。";
+    } else if (teban == -1) {
+      message_p_text = "白がパスしたので黒の番です。";
+    }
+
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        if (othello_field[r][c] == 0) {
+          let st = check_place_self(teban, r, c, othello_field);
+          if (st[0] == true) {
+            message_p.innerText = "置けるところがあります。";
+            return;
+          } else {
+            ;
+          }
+        }
+      }
+    }
+
+    audio();
+    message_p.innerText = message_p_text;
+    game_record.push("pass");
+    setTimeout(() => {
+      place_cpu(teban * -1, level);
+      judgement();
+    }, 1000);
+    judgement();
   }
 
-  for (let r = 0; r < 8; r++) {
-    for (let c = 0; c < 8; c++) {
-      if (othello_field[r][c] == 0) {
-        let st = check_place_self(teban, r, c, othello_field);
-        if (st[0] == true) {
-          message_p.innerText = "置けるところがあります。";
-          return;
+
+
+
+  function show_support(turn_num, support_num) {
+    if (support_num == 0) {
+      return;
+    }
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        if (othello_field[r][c] == 0) {
+          let cell_supprot = check_place_self(turn_num, r, c, othello_field);
+          if (cell_supprot[0]) {
+            let support_span = document.createElement('span');
+            let support_div = document.getElementById(othello_field_id[r][c]);
+            support_span.classList.add("support_mark");
+            support_div.appendChild(support_span);
+          }
+        }
+      }
+    }
+  }
+
+
+
+  function arrayShuffle(array) {
+    for (let i = (array.length - 1); 0 < i; i--) {
+
+      // 0〜(i+1)の範囲で値を取得
+      let r = Math.floor(Math.random() * (i + 1));
+
+      // 要素の並び替えを実行
+      let tmp = array[i];
+      array[i] = array[r];
+      array[r] = tmp;
+    }
+    return array;
+  }
+
+
+
+  function best_place_level1(turn_num, can_place_id_array, can_place_array, field_array2d) {
+    let decided_place_index = ""
+    if (can_place_id_array.length == 0) {
+      decided_place_index = "pass"
+    } else {
+      //セルのスコアを取得
+      let can_place_score = [];
+      for (let i = 0; i < can_place_id_array.length; i++) {
+        let cell_id = can_place_id_array[i]
+        let cell_score = othello_field_score[cell_id[0]][cell_id[1]];
+        can_place_score.push(cell_score);
+      }
+      //scoreの高いところに積極的に置く
+      let max_score = Math.max(...can_place_score);
+      let max_score_index = [];
+      let hoge = -1;
+      while (true) {
+        hoge = can_place_score.indexOf(max_score, hoge + 1);
+        if (hoge == -1) {
+          break;
         } else {
-          ;
+          max_score_index.push(hoge);
         }
       }
-    }
-  }
 
-  audio();
-  message_p.innerText = message_p_text;
-  game_record.push("pass");
-  setTimeout(() => {
-    place_cpu(teban * -1, level);
-    judgement();
-  }, 1000);
-  judgement();
-}
-
-
-
-
-function show_support(turn_num, support_num) {
-  if (support_num == 0) {
-    return;
-  }
-  for (let r = 0; r < 8; r++) {
-    for (let c = 0; c < 8; c++) {
-      if (othello_field[r][c] == 0) {
-        let cell_supprot = check_place_self(turn_num, r, c, othello_field);
-        if (cell_supprot[0]) {
-          let support_span = document.createElement('span');
-          let support_div = document.getElementById(othello_field_id[r][c]);
-          support_span.classList.add("support_mark");
-          support_div.appendChild(support_span);
-        }
+      if (max_score_index.length == 1) {
+        decided_place_index = max_score_index[0];
+      } else {
+        let max_score_index_shuffled = arrayShuffle(max_score_index);
+        decided_place_index = max_score_index_shuffled[0];
       }
     }
+
+    return decided_place_index;
   }
-}
-
-
-
-function arrayShuffle(array) {
-  for (let i = (array.length - 1); 0 < i; i--) {
-
-    // 0〜(i+1)の範囲で値を取得
-    let r = Math.floor(Math.random() * (i + 1));
-
-    // 要素の並び替えを実行
-    let tmp = array[i];
-    array[i] = array[r];
-    array[r] = tmp;
-  }
-  return array;
-}
-
-
