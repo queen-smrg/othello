@@ -282,10 +282,12 @@ function can_not_place_all() {
   //白も黒も置けなければtrue
   for (let r = 0; r < 8; r++) {
     for (let c = 0; c < 8; c++) {
-      let st_b = check_place_self(1, r, c, othello_field);
-      let st_w = check_place_self(-1, r, c, othello_field);
-      if (st_b[0] || st_w[0]) {
-        return false;
+      if (othello_field[r][c] == 0) {
+        let st_b = check_place_self(1, r, c, othello_field);
+        let st_w = check_place_self(-1, r, c, othello_field);
+        if (st_b[0] || st_w[0]) {
+          return false;
+        }
       }
     }
   }
@@ -295,7 +297,8 @@ function can_not_place_all() {
 //最終の結果判定チェック
 function judgement() {
   let game_record_slice = game_record.slice(-2);
-  if (can_not_place_all() || is_0_inFelid() || (game_record_slice[0] == "pass" && game_record_slice[1] == "pass")) {
+  console.log(can_not_place_all());
+  if ((can_not_place_all() || is_0_inFelid()) || (game_record_slice[0] == "pass" && game_record_slice[1] == "pass")) {
     let count = [0, 0]; //[黒の個数、白の個数]
 
     for (let r = 0; r < 8; r++) {
@@ -448,9 +451,9 @@ function place_cpu(turn_num, level_num) {
     //置けるところが無ければpassして終了
     game_record.push("pass");
     show_support(teban, support);
-    judgement();
     console.log("CPUがパスしました。");
     message_p.innerText = "CPUがパスしました。";
+    judgement();
     return;
   } else if (can_place.length == 1) {
     //置けるところが1個しかないならおいて終了
